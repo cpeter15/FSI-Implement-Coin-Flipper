@@ -56,7 +56,7 @@ let isHead = true
         percentHead = 0
         percentTail = 0
         statusMsg.textContent = "Lets Get Flipping!";
-        updateScoreboard(0,0,0,0)
+        updateScoreboard(numHead,percentHead,numTail,percentTail)
     }
         // TODO: Determine flip outcome
         // TODO: Update image and status message in the DOM
