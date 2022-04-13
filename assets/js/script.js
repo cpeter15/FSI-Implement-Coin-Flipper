@@ -1,14 +1,43 @@
 // TODO: Declare any global variables we need
+let totalFlips = 0
+let numHead = 0
+let percentHead = 0
+let numTail = 0
+let percentTail = 0
+let filpButton = document.querySelector("#flipButton")
+let clearButton = document.querySelector("#clearButton")
+let coinImg = document.querySelector("#coinImg")
+let statusMsg = document.querySelector("#statusMsg")
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // This is just a sanity check to make sure your JavaScript script is getting loaded
-    // You can remove it once you see it in your browser console in the developer tools
-    console.log('Hi')
 
     // TODO: Add event listener and handler for flip and clear buttons
-
+    filpButton.addEventListener("click",function(){
+        filpCoin()
+    })
+    clearButton.addEventListener("click",function(){
+        clearScoreboard()
+    })
     // Flip Button Click Handler
+    function filpCoin(){
+        let outcome = Math.round(Math.random() * 100);
+        
+        if(outcome % 2 === 0){
+            coinImg.setAttribute("src", "./assets/images/penny-heads.jpg");
+            console.log(coinImg)
+        }else{
+            coinImg.setAttribute("src", "./assets/images/penny-tails.jpg");
+        }
+        updateScoreboard(outcome);
+    }
+    function updateScoreboard(outcome){
+        if (outcome === 1){
+            statusMsg.textContent = "You Flipped Heads";
+            coinImg
+            totalFlips++;
+            numHead++;
+        }
+    }
         // TODO: Determine flip outcome
         // TODO: Update image and status message in the DOM
 
@@ -24,4 +53,3 @@ document.addEventListener('DOMContentLoaded', function () {
         // TODO: Reset global variables to 0
         // TODO: Update the scoreboard (same logic as in flip button click handler)
 
-})
