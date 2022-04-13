@@ -8,6 +8,7 @@ let filpButton = document.querySelector("#flipButton")
 let clearButton = document.querySelector("#clearButton")
 let coinImg = document.querySelector("#coinImg")
 let statusMsg = document.querySelector("#statusMsg")
+let isHead = true
 
 
 
@@ -20,23 +21,42 @@ let statusMsg = document.querySelector("#statusMsg")
     })
     // Flip Button Click Handler
     function filpCoin(){
-        let outcome = Math.round(Math.random() * 100);
+        isHead = Math.round(Math.random() * 100);
         
-        if(outcome % 2 === 0){
+        if(isHead % 2 === 0){
             coinImg.setAttribute("src", "./assets/images/penny-heads.jpg");
-            console.log(coinImg)
+            statusMsg.textContent = "You Flipped Heads";
         }else{
             coinImg.setAttribute("src", "./assets/images/penny-tails.jpg");
+            statusMsg.textContent = "You Flipped Tails";
         }
-        updateScoreboard(outcome);
+        calculateTotals(isHead);
+        updateScoreboard(numHead,percentHead,numTail,percentTail);
     }
-    function updateScoreboard(outcome){
-        if (outcome === 1){
-            statusMsg.textContent = "You Flipped Heads";
-            coinImg
-            totalFlips++;
-            numHead++;
+    function calculateTotals(isHead){
+        totalFlips++
+        if(isHead % 2 === 0){
+            numHead++
+        }else{
+            numTail++
         }
+        percentHead = Math.round(numHead/totalFlips * 100)
+        percentTail = Math.round(numTail/totalFlips * 100)
+    }
+    function updateScoreboard(heads, headsPercent, tails, tailsPercent,){
+            document.querySelector("#heads").textContent = heads
+            document.querySelector("#tails").textContent = tails
+            document.querySelector("#heads-percent").textContent =`${headsPercent}%`
+            document.querySelector("#tails-percent").textContent =`${tailsPercent}%`
+    }
+    function clearScoreboard(){
+        totalFlips = 0
+        numHead = 0
+        numTail = 0
+        percentHead = 0
+        percentTail = 0
+        statusMsg.textContent = "Lets Get Flipping!";
+        updateScoreboard(0,0,0,0)
     }
         // TODO: Determine flip outcome
         // TODO: Update image and status message in the DOM
